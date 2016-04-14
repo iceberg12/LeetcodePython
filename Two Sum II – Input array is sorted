@@ -1,0 +1,23 @@
+"""
+Given an array of integers, find two numbers such that they add up to a specific target
+number.
+inputs: nums=[], target
+output: [i,j]
+"""
+#1. O(n log n) runtime, O(1) space
+l = len(nums)
+for i in range(0, l):
+    dow = i+1
+    up = l-1
+    if nums[i] + nums[up] < target:
+        continue
+    cur = int((dow+up)/2.0)
+    while dow <= up:
+        if (nums[i] + nums[cur] == target):
+            return [i,cur]
+        if (nums[i] + nums[cur] > target):
+            up = cur - 1
+        if (nums[i] + nums[cur] < target):
+            dow = cur + 1
+        cur = int((dow+up)/2.0)
+return [0,0]
