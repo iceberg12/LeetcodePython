@@ -1,0 +1,29 @@
+"""
+Implement strstr(). Returns the index of the first occurrence of needle in haystack, or –1
+if needle is not part of haystack.
+"""
+
+class Solution(object):
+    def strStr(self, haystack, needle):
+        """
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+        if needle == "":
+            if haystack == "":
+                return 0
+        #1. brute force
+        """
+        l = len(needle)
+        for i in range(0, len(haystack)-l+1):
+            print i
+            if (needle == haystack[i:(i+l)]):
+                return i
+        return -1
+        """
+        #2. Boyer–Moore–Horspool haha
+        return haystack.find(needle) # or return needle in haystack
+        
+        
+# more reference: http://stackoverflow.com/questions/3183582/what-is-the-fastest-substring-search-algorithm
