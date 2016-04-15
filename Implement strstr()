@@ -13,7 +13,7 @@ class Solution(object):
         if needle == "":
             if haystack == "":
                 return 0
-        #1. brute force
+        #1. brute force. O(m*n) since string comparison == take O(m)
         """
         l = len(needle)
         for i in range(0, len(haystack)-l+1):
