@@ -22,8 +22,7 @@ class Solution(object):
                 return i
         return -1
         """
-        #2. Boyer–Moore–Horspool haha
-        return haystack.find(needle) # or return needle in haystack
-        
+        #2. Combination of Boyer-Moore and Horspool. https://hg.python.org/cpython/file/a206f952668e/Objects/stringlib/fastsearch.h
+        return needle in haystack # or return haystack.find(needle)
         
 # more reference: http://stackoverflow.com/questions/3183582/what-is-the-fastest-substring-search-algorithm
