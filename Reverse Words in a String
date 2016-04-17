@@ -1,0 +1,25 @@
+"""
+Given an input string s, reverse the string word by word.
+"""
+#1. O(n) runtime, O(n) space
+class Solution(object):
+    def reverseWords(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        if s == "":
+            return s
+        listWord = []
+        a = len(s)
+        for i in range(len(s)-1, -1, -1):
+            if s[i] == ' ':
+                if a == i+1:
+                    a = i
+                    continue
+                listWord.append(s[(i+1):a])
+                a = i
+            else:
+                if i == 0:
+                    listWord.append(s[i:a])
+        return ' '.join(listWord)
