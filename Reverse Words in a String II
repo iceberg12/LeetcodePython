@@ -1,0 +1,21 @@
+"""
+Similar to Question [Reverse Words in a String], but with the following constraints:
+“The input string does not contain leading or trailing spaces and the words are always
+separated by a single space.”
+Could you do it in-place without allocating extra space?
+"""
+#1. O(n) runtime, O(1) space
+def reverse(m, i, j):
+    return m[:i] + m[i:j][::-1] + m[j:]
+
+def reverseWords(m):
+    a = 0
+    print(m)
+    for i in range(0, len(s)):
+        print(a,i, len(m)-1)
+        if i==(len(m)-1):
+            m = reverse(m, a, i+1)
+        if m[i] == ' ':
+            m = reverse(m, a, i)
+            a = i + 1
+    return m
