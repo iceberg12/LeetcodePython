@@ -1,0 +1,20 @@
+"""
+Longest Substring Without Repeating Characters
+"""
+#1. O(n) runtime, O(n) space
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        #1. Follow the question
+        longstr = []
+        maxlen = 0
+        for i in range(len(s)):
+            if s[i] in longstr:
+                maxlen = max(len(longstr), maxlen)
+                del longstr[:longstr.index(s[i])+1]
+            longstr.append(s[i])  #append last char, whether it is found on previous string so far or not
+        maxlen = max(len(longstr), maxlen)  # append the length of last string
+        return maxlen
