@@ -1,0 +1,23 @@
+"""
+Validate if a given string is numeric.
+"""
+#1.
+class Solution(object):
+    def isNumber(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        i=0
+        while (i<len(s)) and s[i] == ' ':
+            i=i+1
+        j=len(s)-1
+        while (j>-1) and s[j] == ' ':
+            j=j-1
+        if i == len(s):
+            return False
+        try:
+            float(s[i:(j+1)])
+            return True
+        except ValueError:
+            return False
