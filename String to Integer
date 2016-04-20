@@ -1,0 +1,35 @@
+"""
+Implement atoi to convert a string to an integer.
+"""
+#1. O(n) runtime, O(n) space
+class Solution(object):
+    def myAtoi(self, s):
+        result = []
+        output = 0
+        for c in s:
+            if c == ' ':
+                if len(result) == 0:
+                    continue
+                else:
+                    break
+            if c == '-' or c == '+':
+                if len(result) == 0:
+                    result.append(c)
+                    continue
+                else:
+                    break
+            if not (c.isdigit()):
+                break
+            else:
+                result.append(c)
+        if len(result) == 0:
+            return output
+        else:
+            if (result[0] == '-' or result[0] == '+') and len(result) == 1:
+                return output
+            output = int(''.join(result))
+            if output > 2147483647:
+                output = 2147483647
+            if output < -2147483648:
+                output = -2147483648
+        return output
