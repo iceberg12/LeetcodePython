@@ -3,4 +3,4 @@ My solutions to leetcode.
 
 This is where I starts the challange with Python. 
 
-A solution must be efficient in both space and time. Let me know if yours is better.
+The efficiency in space and time of each solution is given. Let me know if yours is better, I would like to learn.
