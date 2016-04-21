@@ -1,0 +1,34 @@
+"""
+Given two strings S and T, determine if they are both one edit distance apart.
+Definition of one edit distance: 
+Being equal, or being so by adding/changing one character in one of the strings.  
+"""
+a = "abcbbeaa"
+b = "abcbbea"
+def oneEditDistance(a, b):
+    if abs(len(a) - len(b)) > 1:
+        return False
+    if not a or not b:
+        return True
+    m = min(len(a), len(b))
+    # count forward
+    count = 0
+    i = 0
+    while (i <= m - 1) and (a[i] == b[i]):
+        count = count + 1
+        i = i + 1
+    # check if the end of string is reached, to avoid double the count
+    if count == m:
+        return True
+    # count backward, 
+    # stop comparing before the diff_pos of the longer str to avoid overpass
+    dif_pos = min(-(len(a)-i), -(len(b)-i))
+    i = -1
+    while (i > dif_pos) and (a[i] == b[i]):
+        count = count + 1
+        i = i - 1
+    diff = abs(len(a) - len(b))
+    if (diff == 1 and count == m) or (diff == 0 and count == m - 1):
+        return True
+    return False
+
