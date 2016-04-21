@@ -2,3 +2,34 @@
 Given a string S, find the length of the longest substring T that contains at most two
 distinct characters.
 """
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        def lastMonoStr(s):
+            if len(s) == 0 or len(s) == 1:
+                return len(s)
+            las = s[len(s)-1]
+            for j in range(len(s)-2, 0, -1):
+                if s[j] == las:
+                    return j
+            return 0
+        T = 2
+        longstr = []
+        maxlen = 0    
+        distinc = 0
+        for i in range(len(s)):
+            if s[i] not in longstr:
+                if distinc==T:
+                    maxlen = max(len(longstr), maxlen)
+                    j = lastMonoStr(longstr)
+                    del longstr[:(j+1)]
+                else:
+                    distinc = distinc + 1
+            longstr.append(s[i])  #append last char, whether it is found on previous string so far or not
+            print longstr
+            print distinc
+        maxlen = max(len(longstr), maxlen)  # append the length of last string
+        return maxlen
