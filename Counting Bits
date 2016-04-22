@@ -1,0 +1,33 @@
+"""
+Given a non negative integer number num. For every numbers i in the range 0 ≤ i ≤ num calculate the number of 1's in their binary representation and return them as an array.
+Example:
+For num = 5 you should return [0,1,1,2,1,2]
+"""
+class Solution(object):
+    def countBits(self, num):
+        """
+        :type num: int
+        :rtype: List[int]
+        """
+        #1. O(n*sizeof(integer)) runtime, O(n) space
+        """
+        def getBits(x):
+            a = 0
+            while (x > 0):
+                if (x % 2) == 1:
+                    a = a + 1
+                x = x/2
+            return a
+        return [getBits(x) for x in range(num+1)]
+        """
+        #2. O(logn) runtime, O(logn^2) space
+        n = 1
+        while n - 1 <= num:
+            if n == 1: 
+                output = [0]
+            else:
+                output = output + [1+x for x in output]
+            n = n*2
+        k = num - (n/2 - 1)
+        remain = [1+x for x in output[0:k]]
+        return output + remain
