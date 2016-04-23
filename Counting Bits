@@ -20,7 +20,7 @@ class Solution(object):
             return a
         return [getBits(x) for x in range(num+1)]
         """
-        #2. O(logn) runtime, O(logn^2) space
+        #2. O(logn) runtime, O(1) space
         n = 1
         while n - 1 <= num:
             if n == 1: 
