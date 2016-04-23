@@ -1,0 +1,23 @@
+"""
+Given an array of numbers nums, in which exactly two elements appear only once and all the other elements appear exactly twice. 
+Find the two elements that appear only once.
+"""
+# O(n) runtime, O(1) space
+class Solution(object):
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        # since the duplicated elements becomes 0 after xor, we can find the xor of the two single numbers
+        xor_2num = reduce(operator.xor, nums)
+        
+        # get the right most set bit of xor_2num and call bit k. Divide nums into 2 group: elements has k bit set, and unset.
+        # Group 1 should contains 1 num we need to find, and some pairs of duplicated elements, so we can find num 1 easily.
+        num_1 = reduce(operator.xor, filter(lambda x: x & xor_2num & -xor_2num, nums))
+        
+        # xor with xor_2num to get the num 2
+        num_2 = num_1 ^ xor_2num
+        return [num_1, num_2]
+        
+# bit cheat sheet: http://www.catonmat.net/blog/low-level-bit-hacks-you-absolutely-must-know/
