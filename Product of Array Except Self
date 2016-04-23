@@ -1,0 +1,22 @@
+"""
+Given an array of n integers where n > 1, nums, return an array output such that output[i] is equal to the product of all the elements of nums except nums[i].
+Solve it without division and in O(n).
+Could you solve it with constant space complexity? (Note: The output array does not count as extra space for the purpose of space complexity analysis.)
+"""
+class Solution(object):
+    def productExceptSelf(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        # O(n) runtime, O(1) space
+        l = len(nums)
+        if l == 0: return 0
+        if l == 1: return nums[0]
+        output = [1]*l
+        for i in range(l):
+            left = left*nums[i-1] if i > 0 else 1
+            right = right*nums[l-i] if i > 0 else 1
+            output[i] = output[i]*left
+            output[l-1-i] = output[l-1-i]*right
+        return output
