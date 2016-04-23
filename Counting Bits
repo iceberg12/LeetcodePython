@@ -21,13 +21,9 @@ class Solution(object):
         return [getBits(x) for x in range(num+1)]
         """
         #2. O(logn) runtime, O(1) space
+        output = [0]
         n = 1
         while n - 1 <= num:
-            if n == 1: 
-                output = [0]
-            else:
-                output = output + [1+x for x in output]
+            output = output + [1+x for x in output]
             n = n*2
-        k = num - (n/2 - 1)
-        remain = [1+x for x in output[0:k]]
-        return output + remain
+        return output[:num+1]
