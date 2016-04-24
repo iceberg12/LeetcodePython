@@ -9,6 +9,7 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
+        #1. O(n) runtime, O(1) space
         res = 0
         sign = 1
         if x < 0:
