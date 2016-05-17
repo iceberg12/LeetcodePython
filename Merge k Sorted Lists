@@ -1,0 +1,41 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        #1. O(nklogk) runtime, O(1) space
+        def merge2L(l1, l2):
+            head = ListNode(0)
+            p = head
+            while (l1 and l2):
+                if l1.val <= l2.val:
+                    p.next = l1
+                    l1 = l1.next
+                else:
+                    p.next = l2
+                    l2 = l2.next
+                p = p.next
+            if not l1: p.next = l2
+            if not l2: p.next = l1
+            return head.next
+        
+        if len(lists) == 0:
+            return lists
+        remain = lists
+        while (len(remain) > 1):
+            j = len(remain)/2
+            for i in range(j):
+                remain[i] = merge2L(remain[i], remain[j + i])
+            if len(remain)%2 == 1:
+                remain[j] = remain[-1]
+                j = j + 1
+            remain = remain[0:j]
+            
+        return remain[0]
