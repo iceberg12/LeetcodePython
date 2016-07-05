@@ -7,6 +7,16 @@ class Solution(object):
         # This is a Fibonacci sequence f(n) = f(n-1) + f(n-2)
         
         #1. O(n) runtime with recursive
+        """if n == 1:
+            return 1
+        p = 1
+        q = 2
+        for i in xrange(3, n+1):
+            temp = q
+            q = p + q
+            p = temp
+        return q
+        """
         #2. O(logn) runtime with matrix exponential. Note that [f(n), f(n-1)] = A * [f(n-1), f(n-2)]
         T = [1,1,1,0]
         def mult(a, b):
