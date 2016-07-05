@@ -1,0 +1,17 @@
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        #1. O(n) runtime
+        # f(k) = max(f(k-1) + A(k), A(k))
+        # msa = max_along(f)
+        if len(nums) == 0:
+            return 0
+        msa = nums[0]
+        f = nums[0]
+        for x_i in nums[1:len(nums)]:
+            f = max(f + x_i, x_i)
+            msa = max(msa, f)
+        return msa
