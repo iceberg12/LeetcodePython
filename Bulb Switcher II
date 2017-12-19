@@ -1,0 +1,47 @@
+"""
+There is a room with n lights which are turned on initially and 4 buttons on the wall. After performing exactly m unknown operations towards buttons, you need to return how many different kinds of status of the n lights could be.
+
+Suppose n lights are labeled as number [1, 2, 3 ..., n], function of these 4 buttons are given below:
+
+1. Flip all the lights.
+2. Flip lights with even numbers.
+3. Flip lights with odd numbers.
+4. Flip lights with (3k + 1) numbers
+"""
+
+#1. O() run, O() space
+"""
+The acts on switches can commute, the order does not matter. Second, if a switch is flipped twice, nothing changes. So there are maximum 2^4 possibilites.
+Also, only need look at the first six bulbs, any bulb after that will follow the same pattern of these six:
+
+4           4
+3       3       3
+    2       2       2
+1   1   1   1   1   1
+(1) (2) (3) (4) (5) (6)
+
+Quick observation: bulb (2),(3) and (4),(5) are just reversed. Bulb (4) is just similar to bulb (2) but added a number of flips by switch (4), which can be determined by checking the difference between (1) and (3). So basically, checking the first 3 is enough to guess the whole sequence.
+
+"""
+class Solution:
+    def flipLights(self, n, m):
+        """
+        :type n: int
+        :type m: int
+        :rtype: int
+        """
+        
+        seen = set()
+        for flips in itertools.product((0, 1), repeat = 4):
+            if (sum(flips) % 2 == m % 2) and (sum(flips) <= m):
+                A = []
+                for i in range(min(n, 3)):  # loop through first 3 bulbs
+                    light = 1
+                    light ^= flips[0]   # first switch
+                    light ^= flips[1] and i % 2 == 1    # second switch
+                    light ^= flips[2] and i % 2 == 0    # third switch
+                    light ^= flips[3] and i % 3 == 0    # fourth switch
+                    A.append(light)
+                seen.add(tuple(A))
+        print(seen)
+        return len(seen)
